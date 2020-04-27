@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <link href="../static/styles.css" rel="stylesheet" th:href="@{styles.css}" type="text/css"/>
+
+</head>
+<body>
+
+<div class="span12">
+    <br>
+
+    <form action="/en/edit" id="myform" method="post">
+
+
+        <table>
+            <tr>
+                <td><label style="color: green; font-size: 26px; font-weight: bold;" th:text="Question"/></td>
+                <td><label style="color: green; font-size: 26px; font-weight: bold;" th:text="Hint"/></td>
+            </tr>
+            <tr>
+                <td>
+                    <textarea style="font-size: 18px;" th:cols="60" th:name="situation" th:rows="10"
+                              th:text="${situation}"></textarea>
+                </td>
+                <td>
+                    <textarea style="font-size: 18px;" th:cols="60" th:name="hint" th:rows="10"
+                              th:text="${hint}"></textarea>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <p>
+            <select class="form-control" id="category" name="category">
+                <option th:each="category : ${categories}"
+                        th:selected="${loadedCategory} == ${category} ? true: false"
+                        th:text="${category}"
+                        th:value="${category}">
+                </option>
+
+            </select>
+        </p>
+        <input hidden name=id th:value="${id}"/>
+        <input style="width:200px; font-size:26px; color: green;" type="submit" value="Save"/>
+    </form>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <link href="../static/styles.css" rel="stylesheet" th:href="@{styles.css}" type="text/css"/>
+
+</head>
+<body>
+
+<div class="span12">
+
+    <form action="/en" method="get">
+        <p>
+            <select class="form-control" id="category" name="category" style="width:150px; height:30px; font-size:20px">
+                <option th:each="category : ${categories}"
+                        th:selected="${loadedCategory} == ${category} ? true: false"
+                        th:text="${category}"
+                        th:value="${category}">
+                </option>
+            </select>
+            <input style="width:150px; height:30px; font-size:20px" type="submit" value="Next"/>
+        </p>
+    </form>
+    <hr/>
+    <br>
+
+    <p>
+        <label style="color: green; font-size: 22px; font-weight: bold;"
+               th:text="${situation}"/>
+    </p>
+    <p>
+        <button style="width:200px; height:30px; font-size:20px" th:onclick="GFG_Fun()">Hint</button>
+    </p>
+
+
+    <p id="GFG_DOWN"
+       *style="color: green;
+              font-size: 18px;
+              /*font-weight: bold;"/
+    >
+    </p>
+
+</div>
+
+<br><br><br><br><br><br>
+<hr/>
+<p>
+
+<table>
+    <tr>
+        <td>
+            <form action="/en/edit" method=get>
+                <input hidden name=id th:value="${id}"/>
+                <input hidden name=loadedCategory th:value="${loadedCategory}"/>
+                <input style="width:200px; height:30px; font-size:20px" type="submit" value="Edit Question"/>
+            </form>
+        </td>
+        <td>
+            <form action="/en/delete" method="get">
+                <input hidden name=id th:value="${id}"/>
+                <input hidden name=category th:value="${loadedCategory}"/>
+                <input style="width:200px; height:30px; font-size:20px" type="submit" value="Remove Question"/>
+            </form>
+        </td>
+        <td>
+            <form action="/en/new" method="get">
+                <input hidden name=category th:value="${loadedCategory}"/>
+                <input style="width:200px; height:30px; font-size:20px" type="submit" value="New Question"/>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var text = /*[[${hint}]]*/ 'default';
+    var down =
+        document.getElementById('GFG_DOWN');
+
+    function GFG_Fun() {
+        down.innerHTML = text;
+    }
+
+    /*]]>*/
+</script>
+
+</body>
+</html>
